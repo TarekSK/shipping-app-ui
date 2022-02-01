@@ -18,8 +18,8 @@ const ParcelWeightPricingForm = ({
   );
 
   // Selected Courier - State
-  const [selectedCourier, setSelectedCourier] = useState(
-    parcelWeightPricingData.courierId
+  const [selectedCourierId, setSelectedCourierId] = useState(
+    parcelWeightPricingData.courier.courierId
   );
 
   // Add Price Per KG
@@ -36,8 +36,18 @@ const ParcelWeightPricingForm = ({
     }
   }, [selectedParcelWeightPricing, isEdit]);
 
+  // Selected Courier
+  useEffect(() => {
+    setParcelWeightPricingData({
+      ...parcelWeightPricingData,
+      courierId: selectedCourierId,
+    });
+  }, [selectedCourierId]);
+
   // Parcel Weight Pricing - Save
   const parcelWeightPricingSave = (e) => {
+    console.log(parcelWeightPricingData);
+
     // Disable Reload
     e.preventDefault();
 
@@ -48,7 +58,6 @@ const ParcelWeightPricingForm = ({
     } else {
       // Parcel Weight Pricing - Create
       const v1 = parcelWeightPricingCreate(parcelWeightPricingData);
-      console.log(v1);
     }
     // IsSave
     setIsSave(true);
@@ -80,7 +89,7 @@ const ParcelWeightPricingForm = ({
       <form className="ui form" onSubmit={(e) => parcelWeightPricingSave(e)}>
         <CourierSelectInput
           formData={parcelWeightPricingData}
-          setSelectedCourier={setParcelWeightPricingData}
+          setFormData={setParcelWeightPricingData}
         />
         <div className="field">
           <label>Parcel Weight From</label>
