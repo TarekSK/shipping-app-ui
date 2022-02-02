@@ -6,7 +6,7 @@ const CourierSelect = ({ courierList, setSelectedCourier }) => {
 
   // Courier - Select
   const courierSelect = (index) => {
-    setSelectedCourier(courierList[index]);
+    setSelectedCourier(courierList[index].courierId);
     setIsActiveIndex(index);
   };
 

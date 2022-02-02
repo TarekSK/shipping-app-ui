@@ -1,10 +1,10 @@
 import apiConfig from "./apiConfig";
 
 // ParcelWeightPricing - GET
-export const parcelWeightPricingGet = async () => {
+export const parcelWeightPricingGet = async (courierId) => {
   // ParcelWeightPricing - GET
-  const response = await apiConfig.get("ParcelWeightPricing");
-  console.log(response);
+  const response = await apiConfig.get(`ParcelWeightPricing/ ${courierId}`);
+  console.log("GET:", courierId);
   // Return Data []
   return response.data;
 };

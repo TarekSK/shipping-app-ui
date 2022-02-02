@@ -20,12 +20,6 @@ function App() {
           <Link className="item" to="/Courier">
             Courier
           </Link>
-          <Link className="item" to="/ParcelDimensionsPricing">
-            ParcelDimensionsPricing
-          </Link>
-          <Link className="item" to="/ParcelWeightPricing">
-            ParcelWeightPricing
-          </Link>
         </div>
       </div>
 
@@ -35,8 +29,13 @@ function App() {
         <Route
           path="/ParcelDimensionsPricing"
           element={<ParcelDimensionsPricing />}
-        />
-        <Route path="/ParcelWeightPricing" element={<ParcelWeightPricing />} />
+        >
+          <Route path=":courierId" element={<ParcelDimensionsPricing />} />
+        </Route>
+
+        <Route path="/ParcelWeightPricing" element={<ParcelWeightPricing />}>
+          <Route path=":courierId" element={<ParcelWeightPricing />} />
+        </Route>
       </Routes>
     </div>
   );

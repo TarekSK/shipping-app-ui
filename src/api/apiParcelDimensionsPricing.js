@@ -1,9 +1,9 @@
 import apiConfig from "./apiConfig";
 
 // ParcelDimensionsPricing - GET
-export const parcelDimensionsPricingGet = async () => {
+export const parcelDimensionsPricingGet = async (courierId) => {
   // ParcelDimensionsPricing - GET
-  const response = await apiConfig.get("ParcelDimensionsPricings");
+  const response = await apiConfig.get(`ParcelDimensionsPricing/ ${courierId}`);
   // Return Data []
   return response.data;
 };
@@ -14,7 +14,7 @@ export const parcelDimensionsPricingCreate = async (
 ) => {
   // ParcelDimensionsPricing - Create
   const response = await apiConfig.post(
-    "ParcelDimensionsPricings",
+    "ParcelDimensionsPricing",
     parcelDimensionsPricing
   );
 
@@ -25,7 +25,7 @@ export const parcelDimensionsPricingCreate = async (
 export const parcelDimensionsPricingEdit = async (parcelDimensionsPricing) => {
   // ParcelDimensionsPricing - Edit
   const response = await apiConfig.put(
-    `ParcelDimensionsPricings/ ${parcelDimensionsPricing.parcelDimensionsPricingId}`,
+    `ParcelDimensionsPricing/ ${parcelDimensionsPricing.parcelDimensionsPricingId}`,
     parcelDimensionsPricing
   );
 

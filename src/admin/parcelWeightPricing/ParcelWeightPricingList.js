@@ -13,50 +13,45 @@ const ParcelWeightPricingList = ({
     setIsEdit(true);
   };
   return (
-    <div className="ui grid">
-      <div className="sixteen wide column">
-        <div className="ui cards">
-          {parcelWeightPricingData.map((parcelWeightPricing, index) => (
-            <div
-              className="card "
-              key={parcelWeightPricing.parcelWeightPricingId}
-            >
-              <div className="content">
-                <div className="header">{parcelWeightPricing.courier}</div>
-                <div className="description">
-                  <div>
-                    <div>parcelWeightKgFrom</div>
-                    <div> {parcelWeightPricing.parcelWeightKgFrom}</div>
-                  </div>
-                  <div>
-                    <div>parcelWeightKgTo</div>
-                    <div> {parcelWeightPricing.parcelWeightKgTo}</div>
-                  </div>
-                  <div>
-                    <div className="metadata">parcelWeightPrice</div>
-                    <div>{parcelWeightPricing.parcelWeightPrice}</div>
-                  </div>
-                  <div>
-                    <div className="summary">parcelWeightIsAddKgPrice</div>
-                    <div> {parcelWeightPricing.parcelWeightIsAddKgPrice}</div>
-                  </div>
-                  <div>
-                    <div className="metadata">parcelKgPrice</div>
-                    <div>{parcelWeightPricing.parcelKgPrice}</div>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="ui bottom attached button"
-                onClick={() => selectParcelWeightPricing(index)}
-              >
-                <i className="edit icon"></i>
-                Edit
-              </div>
-            </div>
+    <div className="">
+      <table className="ui celled table">
+        <thead>
+          <tr>
+            <th>Parcel Weight From</th>
+            <th>Parcel Weight To</th>
+            <th>Price</th>
+            <th>Add Price Per KG ?</th>
+            <th>Price Per KG</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {parcelWeightPricingData.map((parcelPricing, index) => (
+            <tr key={parcelPricing.parcelWeightPricingId}>
+              <td>{parcelPricing.parcelWeightKgFrom}</td>
+              <td>{parcelPricing.parcelWeightKgTo}</td>
+              <td>{parcelPricing.parcelWeightPrice}</td>
+              <td>
+                {parcelPricing.parcelWeightIsAddKgPrice ? (
+                  <i className=" check icon"></i>
+                ) : (
+                  <i className="x icon"></i>
+                )}
+              </td>
+              <td>{parcelPricing.parcelKgPrice}</td>
+
+              <td>
+                <button
+                  className="ui teal button"
+                  onClick={() => selectParcelWeightPricing(index)}
+                >
+                  <i className="edit icon"></i>
+                </button>
+              </td>
+            </tr>
           ))}
-        </div>
-      </div>
+        </tbody>
+      </table>
     </div>
   );
 };

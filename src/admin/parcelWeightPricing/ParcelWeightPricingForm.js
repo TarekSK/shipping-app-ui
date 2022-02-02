@@ -3,7 +3,6 @@ import {
   parcelWeightPricingCreate,
   parcelWeightPricingEdit,
 } from "../../api/apiParcelWeightPricing";
-import CourierSelectInput from "../courier/CourierSelectInput";
 import { ParcelWeightPricingModel } from "../model/ParcelWeightPricingModel";
 
 const ParcelWeightPricingForm = ({
@@ -11,15 +10,14 @@ const ParcelWeightPricingForm = ({
   setIsEdit,
   selectedParcelWeightPricing,
   setIsSave,
+  courierId,
 }) => {
+  // CourierId - SET - [Init]
+  ParcelWeightPricingModel.courierId = courierId;
+
   // Parcel Weight Pricing - State
   const [parcelWeightPricingData, setParcelWeightPricingData] = useState(
     ParcelWeightPricingModel
-  );
-
-  // Selected Courier - State
-  const [selectedCourierId, setSelectedCourierId] = useState(
-    parcelWeightPricingData.courier.courierId
   );
 
   // Add Price Per KG
@@ -36,18 +34,8 @@ const ParcelWeightPricingForm = ({
     }
   }, [selectedParcelWeightPricing, isEdit]);
 
-  // Selected Courier
-  useEffect(() => {
-    setParcelWeightPricingData({
-      ...parcelWeightPricingData,
-      courierId: selectedCourierId,
-    });
-  }, [selectedCourierId]);
-
   // Parcel Weight Pricing - Save
   const parcelWeightPricingSave = (e) => {
-    console.log(parcelWeightPricingData);
-
     // Disable Reload
     e.preventDefault();
 
@@ -59,10 +47,11 @@ const ParcelWeightPricingForm = ({
       // Parcel Weight Pricing - Create
       const v1 = parcelWeightPricingCreate(parcelWeightPricingData);
     }
-    // IsSave
-    setIsSave(true);
+
     // IsEdit - False - [Reset]
     setIsEdit(false);
+    // IsSave
+    setIsSave(true);
   };
 
   // Input - Change
@@ -87,10 +76,6 @@ const ParcelWeightPricingForm = ({
   return (
     <div>
       <form className="ui form" onSubmit={(e) => parcelWeightPricingSave(e)}>
-        <CourierSelectInput
-          formData={parcelWeightPricingData}
-          setFormData={setParcelWeightPricingData}
-        />
         <div className="field">
           <label>Parcel Weight From</label>
           <input

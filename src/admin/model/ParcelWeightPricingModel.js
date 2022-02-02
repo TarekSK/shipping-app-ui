@@ -1,5 +1,4 @@
 export const ParcelWeightPricingModel = {
-  courier: {},
   courierId: "",
   parcelWeightKgFrom: 0,
   parcelWeightKgTo: 0,

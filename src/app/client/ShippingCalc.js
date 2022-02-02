@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { courierGet } from "../../api/apiCourier";
 import CourierSelect from "./CourierSelect";
+import ShippingCalcForm from "./ShippingCalcForm";
 
 const ShippingCalc = () => {
   // Courier - State
   const [courierList, setCourierList] = useState([]);
   // Selected Courier - State
-  const [selectedCourier, setSelectedCourier] = useState(null);
+  const [selectedCourier, setSelectedCourier] = useState();
 
   // Courier List - GET
   useEffect(() => {
@@ -16,7 +17,10 @@ const ShippingCalc = () => {
   // Courier List - GET
   const courierListGET = async () => {
     const response = await courierGet();
+    // Set Couriers
     setCourierList(response);
+    // Select 1st Courier
+    setSelectedCourier(courierList[0]);
   };
 
   return (
@@ -33,6 +37,9 @@ const ShippingCalc = () => {
             courierList={courierList}
             setSelectedCourier={setSelectedCourier}
           />
+        </div>
+        <div className="ten wide column">
+          <ShippingCalcForm selectedCourier={selectedCourier} />
         </div>
       </div>
     </div>

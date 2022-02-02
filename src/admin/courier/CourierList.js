@@ -1,5 +1,6 @@
-import React from 'react';
-import ParcelMixMaxConfig from './ParcelMinMaxConfig';
+import React from "react";
+import { Link, Outlet } from "react-router-dom";
+import ParcelMixMaxConfig from "./ParcelMinMaxConfig";
 
 const CourierList = ({ courierData, setSelectedCourier, setIsEdit }) => {
   // Select Courier
@@ -46,11 +47,25 @@ const CourierList = ({ courierData, setSelectedCourier, setIsEdit }) => {
                 >
                   <i className="edit icon"></i>
                 </button>
+
+                <Link
+                  className="ui  button"
+                  to={`/ParcelWeightPricing/${courier.courierId}`}
+                >
+                  Parcel Weight Pricing
+                </Link>
+                <Link
+                  className="ui  button"
+                  to={`/ParcelDimensionsPricing/${courier.courierId}`}
+                >
+                  Parcel Dimensions Pricing
+                </Link>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Outlet />
     </div>
   );
 };
